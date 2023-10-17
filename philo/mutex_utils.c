@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_utils.c                                        :+:      :+:    :+:   */
+/*   mutex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 20:49:50 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/10/17 16:06:57 by yeonwkan         ###   ########.fr       */
+/*   Created: 2023/10/17 16:16:56 by yeonwkan          #+#    #+#             */
+/*   Updated: 2023/10/17 16:43:16 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	arg_init(t_arg *arg, char **argv)
+void	mutex_init(pthread_mutex_t *fork, t_arg *arg)
 {
-	arg->num = ft_atoi(argv[1]);
-	arg->to_die = ft_atoi(argv[2]);
-	arg->to_eat = ft_atoi(argv[3]);
-	arg->to_sleep = ft_atoi(argv[4]);
-	arg->num_of_eat = ft_atoi(argv[5]);
+	int	i;
+
+	fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * (arg->num));
+	i = 0;
+	while (i < arg->num)
+	{
+		pthread_mutex_init(&fork[i], 0);
+		i++;
+	}
 }

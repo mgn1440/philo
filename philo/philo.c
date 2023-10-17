@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_utils.c                                        :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 20:49:50 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/10/17 16:06:57 by yeonwkan         ###   ########.fr       */
+/*   Created: 2023/10/17 16:31:12 by yeonwkan          #+#    #+#             */
+/*   Updated: 2023/10/17 20:32:05 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	arg_init(t_arg *arg, char **argv)
+void	start_philo(t_data *data)
 {
-	arg->num = ft_atoi(argv[1]);
-	arg->to_die = ft_atoi(argv[2]);
-	arg->to_eat = ft_atoi(argv[3]);
-	arg->to_sleep = ft_atoi(argv[4]);
-	arg->num_of_eat = ft_atoi(argv[5]);
+	int	i;
+
+	i = 0;
+	while (i < data->arg.num)
+	{
+		pthread_create(&data->philo->thread, 0, run_philo, &data->philo[i]);
+		i++;
+	}
+}
+
+void	*run_philo(void *philo)
+{
+	t_philo	*a;
+
+	a = philo;
+	printf("%d\n", a->idx);
+	usleep(1000);
+	return (0);
 }

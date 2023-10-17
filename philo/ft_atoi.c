@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 00:57:11 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/07/08 23:41:45 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:10:28 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_atoi(const char *str)
 	minus = 1;
 	ret = 0;
 	cal = 0;
+	if (!str)
+		return (0);
 	while ((*str >= 9 && *str <= 13) || (*str == ' '))
 		str++;
 	if (*str == '-' || *str == '+')
