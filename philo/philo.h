@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:25:36 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/10/17 20:38:24 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/10/18 23:41:42 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,13 @@ typedef struct s_philo
 	int				idx;
 	int				left_eat;
 	int				last_eat;
-	pthread_mutex_t	**fork;
-	pthread_mutex_t	*print_lock;
-	t_arg			*arg;
+	t_data			*data;
 }	t_philo;
 
 typedef struct s_data
 {
 	t_arg			arg;
 	struct timeval	tv;
-	t_philo			*philo;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print_lock;
 }	t_data;
