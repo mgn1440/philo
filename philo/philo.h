@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:25:36 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/10/18 23:41:42 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/10/31 20:52:49 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ typedef struct s_arg
 	int	num_of_eat;
 }	t_arg;
 
+typedef struct s_data
+{
+	t_arg			arg;
+	struct timeval	tv;
+	pthread_mutex_t	*fork;
+	pthread_mutex_t	print_lock;
+}	t_data;
+
 typedef struct s_philo
 {
 	pthread_t		thread;
@@ -38,17 +46,8 @@ typedef struct s_philo
 	t_data			*data;
 }	t_philo;
 
-typedef struct s_data
-{
-	t_arg			arg;
-	struct timeval	tv;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	print_lock;
-}	t_data;
-
-
 //-------------------main-----------------------
-void	data_init(t_data *data, char **argv);
+void	data_init(t_data *data, char **argv, t_philo **philo);
 
 //-------------------error-----------------------
 int		arg_error(void);
@@ -70,8 +69,7 @@ void	print_think(struct timeval *tv, int i);
 void	print_died(struct timeval *tv, int i);
 
 //-------------------philo----------------------------
-void	start_philo(t_data *data);
+void	start_philo(t_philo *philo);
 void	*run_philo(void *philo);
-
 
 #endif
