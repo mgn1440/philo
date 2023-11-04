@@ -1,14 +1,16 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 OBJS = $(addprefix objs/, $(SRCS:.c=.o))
 OBJ_DIR = objs
-NAME = philo
+NAME = philos #why?
 SRCS = arg_utils.c \
 	error.c \
 	ft_atoi.c \
 	main.c \
 	mutex_utils.c \
 	philo.c \
+	get_time.c \
+	fork.c \
 	print_utils.c
 
 all: $(NAME)
@@ -20,11 +22,11 @@ $(OBJ_DIR):
 
 mandatory: $(OBJS)
 	@rm -f mandatory bonus $(NAME)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@touch $@
 
 objs/%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 fclean: clean
 	@rm -f $(NAME)

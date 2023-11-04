@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutex_utils.c                                      :+:      :+:    :+:   */
+/*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 16:16:56 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/11/04 11:12:58 by yeonwkan         ###   ########.fr       */
+/*   Created: 2023/11/04 13:11:16 by yeonwkan          #+#    #+#             */
+/*   Updated: 2023/11/04 13:12:27 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	mutex_init(pthread_mutex_t **fork, t_arg *arg)
+int	check_death(t_data *data)
 {
-	int	i;
 
-	*fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * (arg->num));
-	i = 0;
-	while (i < arg->num)
-	{
-		pthread_mutex_init(&(*fork)[i], 0);
-		i++;
-	}
 }

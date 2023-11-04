@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:24:17 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/10/31 20:51:30 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:28:36 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	data_init(t_data *data, char **argv, t_philo **philo)
 	int	i;
 
 	arg_init(&data->arg, argv);
-	mutex_init(data->fork, &data->arg);
+	mutex_init(&data->fork, &data->arg);
 	pthread_mutex_init(&data->print_lock, 0);
 	*philo = (t_philo *)malloc(sizeof(t_philo) * (data->arg.num));
 	i = 0;
@@ -40,4 +40,6 @@ void	data_init(t_data *data, char **argv, t_philo **philo)
 		(*philo)[i].data = data;
 		i++;
 	}
+	gettimeofday(&data->tv, 0);
+	data->start_time = (data->tv.tv_sec * 1000000 + data->tv.tv_usec) / 1000;
 }

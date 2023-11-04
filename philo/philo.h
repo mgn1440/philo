@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:25:36 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/10/31 20:52:49 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:14:11 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_data
 	struct timeval	tv;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print_lock;
+	int				start_time;
+	int				now_time;
+	int				is_death;
 }	t_data;
 
 typedef struct s_philo
@@ -59,17 +62,24 @@ int		ft_atoi(const char *str);
 void	arg_init(t_arg *arg, char **argv);
 
 //-------------------mutex_utils-----------------------
-void	mutex_init(pthread_mutex_t *fork, t_arg *arg);
+void	mutex_init(pthread_mutex_t **fork, t_arg *arg);
 
 //-------------------mutex_utils-----------------------
-void	print_take_fork(struct timeval *tv, int i);
-void	print_eat(struct timeval *tv, int i);
-void	print_sleep(struct timeval *tv, int i);
-void	print_think(struct timeval *tv, int i);
-void	print_died(struct timeval *tv, int i);
+void	print_take_fork(t_data *data, int i); void	print_eat(t_data *data, int i);
+void	print_sleep(t_data *data, int i);
+void	print_think(t_data *data, int i);
+void	print_died(t_data *data, int i);
 
 //-------------------philo----------------------------
 void	start_philo(t_philo *philo);
 void	*run_philo(void *philo);
+void	join_all_thread(t_philo *philo);
+
+//------------------get_time----------------------------
+void	get_time(t_data *data);
+
+//-----------------------fork---------------------------
+void	take_fork(t_philo *p);
+void	drop_fork(t_philo *p);
 
 #endif

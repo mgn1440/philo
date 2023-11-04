@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutex_utils.c                                      :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 16:16:56 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/11/04 11:12:58 by yeonwkan         ###   ########.fr       */
+/*   Created: 2023/11/04 12:07:31 by yeonwkan          #+#    #+#             */
+/*   Updated: 2023/11/04 16:27:48 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	mutex_init(pthread_mutex_t **fork, t_arg *arg)
+void	get_time(t_data *data)
 {
-	int	i;
-
-	*fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * (arg->num));
-	i = 0;
-	while (i < arg->num)
-	{
-		pthread_mutex_init(&(*fork)[i], 0);
-		i++;
-	}
+	gettimeofday(&data->tv, 0);
+	data->now_time = (data->tv.tv_sec * 1000000 + data->tv.tv_usec) / 1000;
 }
