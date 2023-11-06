@@ -11,6 +11,7 @@ SRCS = arg_utils.c \
 	philo.c \
 	get_time.c \
 	fork.c \
+	death.c \
 	print_utils.c
 
 all: $(NAME)
