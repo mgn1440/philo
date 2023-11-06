@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:31:12 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/11/06 23:13:33 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/11/07 04:12:29 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ void	*run_philo(void *philo)
 			return (0);
 		take_fork(philo);
 		print_eat(a->data, a->idx);
+		pthread_mutex_lock(&a->data->data_mutex);
 		a->left_eat--;
 		a->last_eat = a->data->now_time;
+		pthread_mutex_unlock(&a->data->data_mutex);
 		get_sleep(a->data, a->data->arg.to_eat);
+		usleep(10);
 		drop_fork(philo);
 		if (!a->left_eat)
 			return (0);
@@ -69,7 +72,9 @@ void	get_sleep(t_data *data, int time)
 	now = data->now_time;
 	while (data->now_time - now < time)
 	{
-		usleep(10);
-		get_time(data);
+		usleep(200);
+		// pthread_mutex_lock(&data->print_lock);
+		// get_time(data);
+		// pthread_mutex_unlock(&data->print_lock);
 	}
 }

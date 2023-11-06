@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 12:13:46 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/11/04 12:19:21 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/11/06 23:36:09 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	take_fork(t_philo *p)
 {
 	if (p->idx % 2)
 	{
-		usleep(1000);
+		usleep(100);
 		pthread_mutex_lock(&p->data->fork[(p->idx + 1) % p->data->arg.num]);
 		print_take_fork(p->data, p->idx);
 		pthread_mutex_lock(&p->data->fork[p->idx]);

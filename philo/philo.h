@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:25:36 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/11/06 21:05:58 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/11/07 03:35:29 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	struct timeval	tv;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print_lock;
+	pthread_mutex_t	data_mutex;
 	int				start_time;
 	int				now_time;
 	int				is_death;
