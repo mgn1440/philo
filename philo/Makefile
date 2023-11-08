@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
 OBJS = $(addprefix objs/, $(SRCS:.c=.o))
 OBJ_DIR = objs
 NAME = philos #why?

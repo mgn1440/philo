@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:31:12 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/11/07 04:12:29 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/11/09 06:12:09 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,19 @@ void	*run_philo(void *philo)
 	a = philo;
 	while (1)
 	{
+		// print_think(a->data, a->idx);
+		pthread_mutex_lock(&a->data->data_mutex);
 		if (a->data->is_death)
+		{
+			pthread_mutex_unlock(&a->data->data_mutex);
 			return (0);
+		}
+		pthread_mutex_unlock(&a->data->data_mutex);
 		take_fork(philo);
 		print_eat(a->data, a->idx);
 		pthread_mutex_lock(&a->data->data_mutex);
 		a->left_eat--;
-		a->last_eat = a->data->now_time;
+		a->last_eat = get_time(a->data);
 		pthread_mutex_unlock(&a->data->data_mutex);
 		get_sleep(a->data, a->data->arg.to_eat);
 		usleep(10);
@@ -67,14 +73,14 @@ void	join_all_thread(t_philo *philo)
 
 void	get_sleep(t_data *data, int time)
 {
+	int	before;
 	int	now;
 
-	now = data->now_time;
-	while (data->now_time - now < time)
+	before = get_time(data);
+	now = before;
+	while (now - before < time)
 	{
 		usleep(200);
-		// pthread_mutex_lock(&data->print_lock);
-		// get_time(data);
-		// pthread_mutex_unlock(&data->print_lock);
+		now = get_time(data);
 	}
 }

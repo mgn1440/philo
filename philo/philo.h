@@ -6,7 +6,7 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 20:25:36 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/11/07 03:35:29 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/11/09 04:44:42 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	join_all_thread(t_philo *philo);
 void	get_sleep(t_data *data, int time);
 
 //------------------get_time----------------------------
-void	get_time(t_data *data);
+int		get_time(t_data *data);
 
 //-----------------------fork---------------------------
 void	take_fork(t_philo *p);
