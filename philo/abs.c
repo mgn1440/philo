@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time.c                                         :+:      :+:    :+:   */
+/*   abs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 12:07:31 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/11/28 21:27:41 by yeonwkan         ###   ########.fr       */
+/*   Created: 2023/11/23 13:15:09 by yeonwkan          #+#    #+#             */
+/*   Updated: 2023/11/23 14:03:40 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-long long	get_time(t_data *data)
+int	abs(int a)
 {
-	gettimeofday(&data->tv, 0);
-	return ((data->tv.tv_sec * 1000000 + data->tv.tv_usec) / 1000);
+	if (a < 0)
+		return (-a);
+	else
+		return (a);
 }

@@ -1,18 +1,21 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror -g
 OBJS = $(addprefix objs/, $(SRCS:.c=.o))
 OBJ_DIR = objs
-NAME = philos #why?
+NAME = philo
 SRCS = arg_utils.c \
 	error.c \
 	ft_atoi.c \
 	main.c \
 	mutex_utils.c \
-	philo.c \
+	philos.c \
 	get_time.c \
 	fork.c \
 	death.c \
-	print_utils.c
+	print_utils.c \
+	free.c \
+	philo_utils.c \
+	abs.c
 
 all: $(NAME)
 

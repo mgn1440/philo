@@ -6,13 +6,13 @@
 /*   By: yeonwkan <yeonwkan@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 13:11:16 by yeonwkan          #+#    #+#             */
-/*   Updated: 2023/11/09 05:57:57 by yeonwkan         ###   ########.fr       */
+/*   Updated: 2023/12/02 03:31:30 by yeonwkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_death(t_data *data, t_philo *philo)
+int	death(t_data *data, t_philo *philo)
 {
 	int	i;
 	int	eat_done;
@@ -20,32 +20,40 @@ int	check_death(t_data *data, t_philo *philo)
 
 	i = 0 - 1;
 	eat_done = 0;
-	now = 0;
 	while (1)
 	{
 		i = (i + 1) % data->arg.num;
 		if (eat_done == data->arg.num)
 			return (0);
-		pthread_mutex_lock(&data->data_mutex);
-		if (!philo[i].left_eat)
-		{
-			eat_done++;
-			pthread_mutex_unlock(&data->data_mutex);
+		if (is_done(data, philo, &eat_done, i))
 			continue ;
-		}
-		else
-			eat_done = 0;
-		pthread_mutex_unlock(&data->data_mutex);
 		now = get_time(data);
-		pthread_mutex_lock(&data->data_mutex);
+		pthread_mutex_lock(&data->death_lock);
 		if (now - philo[i].last_eat > data->arg.to_die)
 		{
-			pthread_mutex_unlock(&data->data_mutex);
+			pthread_mutex_unlock(&data->death_lock);
 			print_died(data, i);
 			if (data->arg.num == 1)
 				pthread_detach(philo[i].thread);
-			return (1);
+			return (0);
 		}
-		pthread_mutex_unlock(&data->data_mutex);
+		pthread_mutex_unlock(&data->death_lock);
+	}
+}
+
+int	is_done(t_data *data, t_philo *philo, int *eat_done, int i)
+{
+	pthread_mutex_lock(&data->left_eat_lock);
+	if (!philo[i].left_eat)
+	{
+		pthread_mutex_unlock(&data->left_eat_lock);
+		(*eat_done) += 1;
+		return (0);
+	}
+	else
+	{
+		pthread_mutex_unlock(&data->left_eat_lock);
+		(*eat_done) = 0;
+		return (1);
 	}
 }
